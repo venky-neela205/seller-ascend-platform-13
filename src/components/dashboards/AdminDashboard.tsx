@@ -1,9 +1,9 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Users, BookOpen, Award, TrendingUp, Upload, Plus } from "lucide-react";
 import { useUser } from "@/contexts/UserContext";
+import { ModuleManagement } from "@/components/modules/ModuleManagement";
 
 interface AdminDashboardProps {
   activeSection: string;
@@ -11,6 +11,14 @@ interface AdminDashboardProps {
 
 export const AdminDashboard = ({ activeSection }: AdminDashboardProps) => {
   const { users } = useUser();
+
+  if (activeSection === "modules") {
+    return (
+      <div className="p-6">
+        <ModuleManagement />
+      </div>
+    );
+  }
 
   if (activeSection !== "dashboard") {
     return (
@@ -20,7 +28,6 @@ export const AdminDashboard = ({ activeSection }: AdminDashboardProps) => {
           <CardContent className="p-6">
             <p className="text-muted-foreground">
               {activeSection === "users" && "User management interface would be here"}
-              {activeSection === "modules" && "Module management interface would be here"}
               {activeSection === "reports" && "Comprehensive reports dashboard would be here"}
               {activeSection === "settings" && "System settings and configuration options would be here"}
             </p>
