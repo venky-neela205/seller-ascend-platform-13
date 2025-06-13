@@ -7,6 +7,8 @@ import { Badge } from "@/components/ui/badge";
 import { Plus, Edit, Eye, Users } from "lucide-react";
 import { useUser } from "@/contexts/UserContext";
 import { ModuleEditor } from "./ModuleEditor";
+import { ViewModules } from "./ViewModules";
+import { ModuleSellersMapping } from "./ModuleSellersMapping";
 
 const modulesData = [
   {
@@ -46,7 +48,7 @@ const modulesData = [
 
 export const ModuleManagement = () => {
   const { currentUser } = useUser();
-  const [currentView, setCurrentView] = useState<"grid" | "editor">("grid");
+  const [currentView, setCurrentView] = useState<"grid" | "editor" | "view" | "mapping">("grid");
   const [selectedModuleId, setSelectedModuleId] = useState<number | null>(null);
 
   const handleEdit = (moduleId: number) => {
@@ -57,12 +59,14 @@ export const ModuleManagement = () => {
 
   const handleView = (moduleId: number) => {
     console.log("View module:", moduleId);
-    // TODO: Implement view modal or navigation
+    setSelectedModuleId(moduleId);
+    setCurrentView("view");
   };
 
   const handleMapSellers = (moduleId: number) => {
     console.log("Map sellers for module:", moduleId);
-    // TODO: Implement seller mapping functionality
+    setSelectedModuleId(moduleId);
+    setCurrentView("mapping");
   };
 
   const handleAddNew = () => {
@@ -94,12 +98,31 @@ export const ModuleManagement = () => {
     }
   };
 
+  // Render different views based on current state
   if (currentView === "editor") {
     return (
       <ModuleEditor 
         moduleId={selectedModuleId} 
         onBack={handleBackToGrid}
         isAdmin={currentUser?.role === "sys-admin"}
+      />
+    );
+  }
+
+  if (currentView === "view" && selectedModuleId) {
+    return (
+      <ViewModules 
+        moduleId={selectedModuleId} 
+        onBack={handleBackToGrid}
+      />
+    );
+  }
+
+  if (currentView === "mapping" && selectedModuleId) {
+    return (
+      <ModuleSellersMapping 
+        moduleId={selectedModuleId} 
+        onBack={handleBackToGrid}
       />
     );
   }
