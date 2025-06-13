@@ -1,7 +1,7 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Upload, Users, BarChart3, FileText, Plus } from "lucide-react";
+import { DistributorReports } from "@/components/reports/DistributorReports";
 
 interface DistributorDashboardProps {
   activeSection: string;
@@ -78,15 +78,8 @@ export const DistributorDashboard = ({ activeSection }: DistributorDashboardProp
 
   if (activeSection === "reports") {
     return (
-      <div className="p-6 space-y-6">
-        <h1 className="text-3xl font-bold">Reports</h1>
-        <Card>
-          <CardContent className="p-6">
-            <p className="text-muted-foreground">
-              Comprehensive distributor reports and analytics would be displayed here.
-            </p>
-          </CardContent>
-        </Card>
+      <div className="p-6">
+        <DistributorReports />
       </div>
     );
   }
