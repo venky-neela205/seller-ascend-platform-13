@@ -4,14 +4,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
-import { BasicInfo } from "./BasicInfo";
 import { ReelsModule } from "./ReelsModule";
 import { ClassroomModule } from "./ClassroomModule";
 import { InMarketTable } from "./InMarketTable";
 import { MarkupTable } from "./MarkupTable";
 
 export const ModuleManagement = () => {
-  const [activeTab, setActiveTab] = useState("basic-info");
+  const [activeTab, setActiveTab] = useState("reels");
 
   return (
     <div className="p-6 space-y-6">
@@ -29,17 +28,12 @@ export const ModuleManagement = () => {
         </CardHeader>
         <CardContent>
           <Tabs value={activeTab} onValueChange={setActiveTab}>
-            <TabsList className="grid w-full grid-cols-5">
-              <TabsTrigger value="basic-info">Basic Info</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-4">
               <TabsTrigger value="reels">Reels</TabsTrigger>
               <TabsTrigger value="classroom">Classroom Training</TabsTrigger>
               <TabsTrigger value="inmarket">In Market</TabsTrigger>
               <TabsTrigger value="markup">Markup</TabsTrigger>
             </TabsList>
-            
-            <TabsContent value="basic-info" className="mt-6">
-              <BasicInfo />
-            </TabsContent>
             
             <TabsContent value="reels" className="mt-6">
               <ReelsModule />
